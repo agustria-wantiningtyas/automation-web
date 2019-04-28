@@ -1,0 +1,135 @@
+<!-- BEGIN: Subheader -->
+<div class="employee-page">
+	<div class="m-subheader ">
+		<div class="d-flex align-items-center">
+			<div class="mr-auto">
+				<h3 class="m-subheader__title m-subheader__title--separator">
+					Employee
+				</h3>
+				<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+					<li class="m-nav__item">
+						<span class="m-nav__link-text">
+							Master Data
+						</span>
+					</li>
+					<li class="m-nav__separator">
+						-
+					</li>
+					<li class="m-nav__item">
+						<span class="m-nav__link-text">
+							Employee
+						</span>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a (click)="goAdd();">
+					<button type="button" class="btn m-btn--pill btn-add btn-shadow">
+						<img src="assets/app/images/elabram/Add.svg" title="add"> Add</button>
+				</a>
+				<a (click)="exportCSV()">
+					<button type="button" class="btn m-btn--pill btn-excel btn-shadow">
+						<img src="assets/app/images/elabram/Download_excel.svg" title="Excel"> Excel</button>
+				</a>
+				<button type="button" class="btn m-btn--pill btn-refresh btn-shadow" (click)="doRefresh()">
+					<img src="assets/app/images/elabram/Refresh.svg" title="refresh"> Refresh</button>
+
+			</div>
+		</div>
+	</div>
+	<!-- END: Subheader -->
+	<div class="m-content">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12">
+				<div class="m-portlet m-portlet--full-height">
+					<div class="tab-content">
+						<p-growl [value]="msgs"></p-growl>
+
+						<p-dataTable #dt [value]="arrEmployee" [lazy]="true" [rows]="rows" [paginator]="true" [pageLinks]="pageLinks"
+						 [rowsPerPageOptions]="rowsPerPageOptions" [totalRecords]="totalRecords" (onLazyLoad)="loadTaskLazy($event)"
+						 responsive="true" [loading]="loading">
+
+							<p-column field="created_at" header="No" [style]="{ width: '50px', 'text-align': 'left' }" [sortable]="false">
+								<ng-template let-rowIndexValue="rowIndex" pTemplate="body">
+									{{rowIndexValue+1}}
+								</ng-template>
+							</p-column>
+
+							<p-column *ngFor="let col of employee" [field]="col.field" [header]="col.header" [style]="col.style" [filter]="col.filter"
+							 [filterMatchMode]="col.filterMatchMode" [sortable]="col.sortable">
+
+								<ng-template *ngIf="col.header == 'Name'" pTemplate="filter" let-col>
+									<input type="text" style="width:100%;" class="input-text" [(ngModel)]="nameFilter" (keyup.enter)="dt.filter($event.value=nameFilter,col.field,col.filterMatchMode);"
+									 (change)="dt.filter($event.value=nameFilter,col.field,col.filterMatchMode);" />
+								</ng-template>
+
+								<ng-template *ngIf="col.header == 'Gender'" pTemplate="filter" let-col>
+									<p-multiSelect [options]="gender_filter" filter="true" [style]="{'width':'100%'}" [(ngModel)]="genderFilter"
+									 [resetFilterOnHide]="true" (onChange)="dt.filter($event.value=genderFilter,col.field,col.filterMatchMode)"
+									 styleClass="ui-column-filter"></p-multiSelect>
+								</ng-template>
+
+								<ng-template *ngIf="col.header == 'Email'" pTemplate="filter" let-col>
+									<input type="text" style="width:100%;" class="input-text" [(ngModel)]="emailFilter" (keyup.enter)="dt.filter($event.value=emailFilter,col.field,col.filterMatchMode);"
+									 (change)="dt.filter($event.value=emailFilter,col.field,col.filterMatchMode);" />
+								</ng-template>
+
+								<ng-template *ngIf="col.header == 'No Telephone'" pTemplate="filter" let-col>
+									<input type="text" style="width:100%;" class="input-text" [(ngModel)]="noTelephoneFilter" (keyup.enter)="dt.filter($event.value=noTelephoneFilter,col.field,col.filterMatchMode);"
+									 (change)="dt.filter($event.value=noTelephoneFilter,col.field,col.filterMatchMode);" />
+								</ng-template>
+
+								<ng-template *ngIf="col.header == 'Action'" let-employee="rowData" let-row pTemplate="body">
+									<a (click)="goEdit(employee);">
+										<img src="assets/app/images/elabram/Edit.svg" class="icon-action" title="Edit">
+									</a>
+									<a (click)="confirmDelete(employee);">
+										<img src="assets/app/images/elabram/Delete.svg" class="icon-action" title="Delete">
+									</a>
+								</ng-template>
+
+							</p-column>
+
+							<ng-template pTemplate="paginatorRight">
+								<span style="position: absolute; right: 10px; bottom: 7px; color:#0073ea; font-weight: normal;">Showing
+									{{arrEmployee.length}}
+									of {{totalRecords}}
+									entries</span>
+							</ng-template>
+
+						</p-dataTable>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<p-dialog [(visible)]="dialog" header="{{modalTitle}}" [baseZIndex]="10000" [modal]="true" [draggable]="false"
+ [resizable]="false" [responsive]="true" [contentStyle]="this.modalStyle" [blockScroll]="true" [focusOnShow]="false"
+ (onHide)="hideDetail()" styleClass="{{styleClass}}">
+
+	<div class="col-12">
+		<div class="media-body">
+			<form novalidate>
+				<div class="form-group mt-2">
+					<div class="mb-1">Supported Documents</div>
+					<input #fileInput type="file" accept=".xls" (change)="onFileChange($event)" (click)="reset()" style="width: 93%;">
+					<a *ngIf="isFile" (click)="reset()" style="float: right;">
+						<img src="assets/app/images/elabram/Cancel.svg" style="width: 18px; margin: 2px 0 0 0;" title="Cancel">
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p-footer>
+		<div class="col-12 text-center">
+			<button type=" button" class="btn m-btn--pill btn-import btn-shadow" (click)="importFile();" [disabled]="loading_import || !isFile"
+			 [ngClass]="{'m-loader m-loader--right m-loader--dark': loading_import}">
+				<img src="assets/app/images/elabram/Import_white.svg" title="Import"> Import</button>
+			<button class="btn m-btn--pill btn-min-width btn-outline btn-shadow btn-close " (click)="hideImportDialog();">
+				Close</button>
+		</div>
+	</p-footer>
+</p-dialog>

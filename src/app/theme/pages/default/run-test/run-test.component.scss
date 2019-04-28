@@ -1,0 +1,99 @@
+.run-test-page {
+    legend {
+        font-size: 1.0rem;
+    }
+    .m-content {
+        padding-bottom: 0px;
+    }
+    .btn-add {
+        margin-left: 2px;
+        border-color: #1a7bcd;
+        background-color: #1a7bcd;
+        color: #fff;
+        padding: 9px 18px;
+        border-radius: 5px;
+        img {
+            vertical-align: top;
+            width: 15px;
+        }
+    }
+    .btn-import {
+        border-color: #1a7bcd;
+        background-color: #1a7bcd;
+        color: #fff;
+        padding-right: 20px;
+        img {
+            vertical-align: top;
+            width: 15px;
+        }
+    }
+    .btn-template {
+        border-color: #ffb822;
+        background-color: #ffb822;
+        color: #000;
+        padding-left: 20px;
+        img {
+            vertical-align: top;
+            width: 15px;
+        }
+    }
+    .btn-archive {
+        border-color: #607D8B;
+        background-color: #607D8B;
+        color: #fff;
+        img {
+            vertical-align: top;
+            width: 15px;
+        }
+    }
+    .btn-excel {
+        margin-left: 2px;
+        border-color: #06B76C;
+        background-color: #06B76C;
+        color: #fff;
+        padding: 9px 18px;
+        border-radius: 5px;
+        img {
+            vertical-align: top;
+            width: 15px;
+        }
+    }
+    .btn-refresh {
+        margin-left: 2px;
+        border-color: #00B5B8;
+        background-color: #00B5B8;
+        color: #fff;
+        padding: 9px 18px;
+        border-radius: 5px;
+        img {
+            vertical-align: unset;
+            width: 15px;
+        }
+    }
+    .icon-action {
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
+    } //filter
+    .ui-column-filter,
+    .ui-multiselect {
+        margin-top: unset;
+        .ui-multiselect-label-container {
+            white-space: nowrap;
+            .ui-multiselect-label {
+                margin-bottom: unset;
+            }
+        }
+    }
+    .ui-multiselect-panel {
+        min-width: 12em;
+        .ui-multiselect-filter-container {
+            width: 80%;
+        }
+    }
+    .filter_date {
+        .ui-calendar {
+            width: 100%;
+        }
+    }
+}

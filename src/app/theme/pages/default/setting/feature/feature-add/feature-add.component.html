@@ -1,0 +1,80 @@
+<!-- BEGIN: Subheader -->
+<div class="feature-add-page">
+	<div class="m-subheader ">
+		<div class="d-flex align-items-center">
+			<div class="mr-auto" style="z-index:9;">
+				<h3 class="m-subheader__title m-subheader__title--separator">
+					Feature
+				</h3>
+				<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+					<li class="m-nav__item">
+						<span class="m-nav__link-text">
+							Setting
+						</span>
+					</li>
+					<li class="m-nav__separator">
+						-
+					</li>
+					<li class="m-nav__item">
+						<a (click)="goFeature();" class="m-nav__link">
+							<span class="m-nav__link-text">
+								Feature
+							</span>
+						</a>
+					</li>
+					<li class="m-nav__separator">
+						-
+					</li>
+					<li class="m-nav__item">
+						<span class="m-nav__link-text">
+							Add
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<p-growl [value]="msgs"></p-growl>
+	</div>
+	<!-- END: Subheader -->
+	<div class="m-content">
+		<div class="row outer-box">
+			<div class="offset-lg-3 col-lg-6 col-md-12 offset-lg-3">
+				<div class="m-portlet m-portlet--full-height">
+					<div class="tab-content">
+						<form novalidate [formGroup]="myForm" (ngSubmit)="doAdd(myForm.value)">
+							<div class="col-lg-12">
+								<div class="row mb-3">
+									<div style="float: left; width: 150px; margin-top:3px;">
+										Feature
+									</div>
+									<div style="float: left; width: 66%;">
+										: <input type="text" pInputText style="width:90%;" class="input-text" placeholder="Enter Feature"
+										 formControlName="setFeatureName" />
+									</div>
+								</div>
+								<!-- <div class="row mb-3">
+									<div style="float: left; width: 150px; margin-top:3px;">
+										Status
+									</div>
+									<div style="float: left; width: 66%;">
+										:
+										<p-radioButton name="setStatus" formControlName="setStatus" value="Y" label="Active"></p-radioButton>
+										<span style="margin: 0 20px;"></span>
+										<p-radioButton name="setStatus" formControlName="setStatus" value="N" label="Inactive"></p-radioButton>
+									</div>
+								</div> -->
+								<hr>
+								<div class="col-12 text-center">
+									<button type="submit" class="btn m-btn--pill btn-min-width btn-success btn-shadow" [disabled]="!myForm.valid || disableBtn">
+										<i class="ft-check"></i> Submit</button>&nbsp;
+									<button type="button" (click)="goFeature();" [disabled]=" disableBtn" class="btn m-btn--pill btn-min-width btn-outline btn-shadow">
+										Cancel</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

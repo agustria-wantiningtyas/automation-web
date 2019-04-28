@@ -1,0 +1,137 @@
+<!-- BEGIN: Subheader -->
+<div class="feature-page">
+	<div class="m-subheader ">
+		<div class="d-flex align-items-center">
+			<div class="mr-auto">
+				<h3 class="m-subheader__title m-subheader__title--separator">
+					Report
+				</h3>
+				<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+					<li class="m-nav__item">
+						<span class="m-nav__link-text">
+							Report
+						</span>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+	</div>
+	<!-- END: Subheader -->
+	<div class="m-content">
+		<div class="row">
+			<div class="offset-lg-2 col-lg-8 col-md-12">
+				<div class="m-portlet m-portlet--full-height">
+					<div class="tab-content">
+						<form novalidate [formGroup]="myForm">
+							<div class="row mb-3">
+								<div class="col-md-6" style="text-align: left;">
+									<div style="padding-bottom: 35px;">
+										<div style="width: 85px; float: left;">Period</div>
+										<div style="width: 5px; float: left;">:</div>
+										<div style="float: left; width: 75%; margin-top: -3px;">
+											<p-dropdown class="input-multiselect" [options]="is_month"
+												placeholder="Month" formControlName="selectedMonth">
+											</p-dropdown>
+											<p-dropdown class="input-multiselect" [options]="is_year"
+												placeholder="Year" formControlName="selectedYear">
+											</p-dropdown>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6" style="text-align: center;">
+									<button type=" button" class="btn m-btn--pill btn-import btn-shadow"
+										(click)="doPreview(myForm.value);"
+										style="padding: 5px 25px;">Preview</button>
+									<button type="button" class="btn m-btn--pill btn-success btn-shadow"
+										style="padding: 5px 25px;" (click)="doExport(myForm.value)"> Export to Excel</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-12 col-lg-12" *ngIf="is_preview">
+				<div class="m-portlet m-portlet--full-height">
+					<div class="tab-content">
+						<p-growl [value]="msgs"></p-growl>
+
+						<p-dataTable #dt [value]="arrFeature" [lazy]="true" [rows]="rows" [paginator]="false"
+							[pageLinks]="pageLinks" [rowsPerPageOptions]="rowsPerPageOptions"
+							[totalRecords]="totalRecords" responsive="true"
+							[loading]="loading">
+
+							<p-column field="created_at" header="No" [style]="{ width: '20px', 'text-align': 'left' }"
+								[sortable]="false">
+								<ng-template let-rowIndexValue="rowIndex" pTemplate="body">
+									{{rowIndexValue+1}}
+								</ng-template>
+							</p-column>
+
+							<p-column *ngFor="let col of feature" [field]="col.field" [header]="col.header"
+								[style]="col.style" [filter]="col.filter" [filterMatchMode]="col.filterMatchMode"
+								[sortable]="col.sortable">
+
+								<ng-template *ngIf="col.header == 'Test Case'" pTemplate="filter" let-col>
+									<input type="text" style="width:100%;" class="input-text" [(ngModel)]="nameFilter"
+										(keyup.enter)="dt.filter($event.value=nameFilter,col.field,col.filterMatchMode);"
+										(change)="dt.filter($event.value=nameFilter,col.field,col.filterMatchMode);" />
+								</ng-template>
+								<ng-template *ngIf="col.header == 'Feature Name'" pTemplate="filter" let-col>
+									<input type="text" style="width:100%;" class="input-text"
+										[(ngModel)]="featureNameFilter"
+										(keyup.enter)="dt.filter($event.value=featureNameFilter,col.field,col.filterMatchMode);"
+										(change)="dt.filter($event.value=featureNameFilter,col.field,col.filterMatchMode);" />
+								</ng-template>
+
+							</p-column>
+
+							<ng-template pTemplate="paginatorRight">
+								<span
+									style="position: absolute; right: 10px; bottom: 7px; color:#0073ea; font-weight: normal;">Showing
+									{{arrFeature.length}}
+									of {{totalRecords}}
+									entries</span>
+							</ng-template>
+
+						</p-dataTable>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<p-dialog [(visible)]="dialog" header="{{modalTitle}}" [baseZIndex]="10000" [modal]="true" [draggable]="false"
+	[resizable]="false" [responsive]="true" [contentStyle]="this.modalStyle" [blockScroll]="true" [focusOnShow]="false"
+	(onHide)="hideDetail()" styleClass="{{styleClass}}">
+
+	<div class="col-12">
+		<div class="media-body">
+			<form novalidate>
+				<div class="form-group mt-2">
+					<div class="mb-1">Supported Documents</div>
+					<input #fileInput type="file" accept=".xls" (change)="onFileChange($event)" (click)="reset()"
+						style="width: 93%;">
+					<a *ngIf="isFile" (click)="reset()" style="float: right;">
+						<img src="assets/app/images/elabram/Cancel.svg" style="width: 18px; margin: 2px 0 0 0;"
+							title="Cancel">
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p-footer>
+		<div class="col-12 text-center">
+			<button type=" button" class="btn m-btn--pill btn-import btn-shadow" (click)="importFile();"
+				[disabled]="loading_import || !isFile"
+				[ngClass]="{'m-loader m-loader--right m-loader--dark': loading_import}">
+				<img src="assets/app/images/elabram/Import_white.svg" title="Import"> Import</button>
+			<button class="btn m-btn--pill btn-min-width btn-outline btn-shadow btn-close "
+				(click)="hideImportDialog();">
+				Close</button>
+		</div>
+	</p-footer>
+</p-dialog>

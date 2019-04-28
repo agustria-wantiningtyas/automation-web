@@ -1,0 +1,57 @@
+<!-- BEGIN: Left Aside -->
+<button class="m-aside-left-close  m-aside-left-close--skin-light" id="m_aside_left_close_btn" appunwraptag="">
+	<i class="la la-close"></i>
+</button>
+<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light">
+	<!-- BEGIN: Aside Menu -->
+	<div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light"
+	 data-menu-vertical="true" m-menu-scrollable="1" m-menu-dropdown-timeout="500">
+
+		<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow">
+			<!-- First level menu -->
+			<li *ngFor="let menuItem of menuItems" class="{{menuItem.class}}" routerLinkActive="{{menuItem.routerLinkActive}}"
+			 routerLinkActiveOptions="{ exact: true }" aria-haspopup="true" m-menu-link-redirect="menuItem.mMenuLinkRedirect"
+			 m-menu-submenu-toggle="menuItem.mMenuSubmenuToggle">
+				<a (click)="stop()" *ngIf="menuItem.submenu.length == 0" routerLink="{{menuItem.path}}" class="m-menu__link">
+					<!-- <i class="m-menu__link-icon {{menuItem.icon}}"></i> -->
+					<!-- <img *ngIf="menuItem.icon != '' " [ngClass]="[menuItem.icon]" class="menu_icon"> -->
+					<div *ngIf="menuItem.icon != '' " [ngClass]="[menuItem.icon]" class="menu_icon"></div>
+					<span class="m-menu__link-text menu_text_parent">{{menuItem.title}}</span>
+				</a>
+				<a (click)="stop()" *ngIf="menuItem.submenu.length > 0" href="javascript:;" class="m-menu__link m-menu__toggle">
+					<!-- <i class="m-menu__link-icon {{menuItem.icon}}"></i> -->
+					<!-- <img *ngIf="menuItem.icon != '' " [ngClass]="[menuItem.icon]" class="menu_icon"> -->
+					<div *ngIf="menuItem.icon != '' " [ngClass]="[menuItem.icon]" class="menu_icon"></div>
+					<span class="m-menu__link-text menu_text_parent">{{menuItem.title}}</span>
+					<i class="m-menu__ver-arrow la la-angle-right"></i>
+				</a>
+				<!-- Second level menu -->
+				<div *ngIf="menuItem.submenu.length > 0" class="m-menu__submenu">
+					<span class="m-menu__arrow"></span>
+					<ul class="m-menu__subnav">
+						<li class="m-menu__item  m-menu__item--parent" routerLinkActive="{{menuItem.routerLinkActive}}"
+						 routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+							<span class="m-menu__link">
+								<span class="m-menu__link-text">{{menuItem.title}}</span>
+							</span>
+						</li>
+						<li *ngFor="let menuSubItem of menuItem.submenu" class="m-menu__item" [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'm-menu__item--active'"
+						 routerLinkActiveOptions="{ exact: true }" aria-haspopup="true" m-menu-link-redirect="1">
+							<a (click)="stop()" routerLink="{{menuSubItem.path}}" class="m-menu__link">
+								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+									<span></span>
+								</i>
+								<span class="m-menu__link-text">{{menuSubItem.title}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- Third level menu -->
+				<!-- comingsoon -->
+			</li>
+		</ul>
+	</div>
+	<!-- END: Aside Menu -->
+</div>
+<!-- END: Left Aside -->
+<p-confirmDialog width="425"></p-confirmDialog>

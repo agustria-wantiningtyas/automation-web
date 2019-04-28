@@ -1,0 +1,42 @@
+<!-- BEGIN: Subheader -->
+<div class="run-test-detail-page">
+	<div class="m-subheader ">
+		<div class="d-flex align-items-center">
+			<div class="mr-auto" style="z-index:9;">
+				<h3 class="m-subheader__title m-subheader__title--separator">
+					Detail
+				</h3>
+				<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+					<li class="m-nav__item">
+						<span class="m-nav__link-text">
+							Run Test
+						</span>
+					</li>
+					<li class="m-nav__separator">
+						-
+					</li>
+					<li class="m-nav__item">
+						<a (click)="goRunTest();" class="m-nav__link">
+							<span class="m-nav__link-text">
+								Detail
+							</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<p-growl [value]="msgs"></p-growl>
+	</div>
+	<!-- END: Subheader -->
+	<div class="m-content">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12">
+				<div class="m-portlet m-portlet--full-height">
+					<div class="tab-content">
+						<iframe src="http://localhost:81/login/report.html" height="700px" width="100%"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

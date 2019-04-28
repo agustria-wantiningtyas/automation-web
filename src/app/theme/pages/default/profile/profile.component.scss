@@ -1,0 +1,28 @@
+.profile-page {
+  .form-profile {
+    .input-group-text {
+      background: #ECEFF1;
+    }
+  }
+
+  .form-change-password {
+    .input-group-text {
+      background: #fff;
+    }
+  }
+
+  .m-card-profile__pic-wrapper {
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      width: 130px;
+      height: 130px;
+    }
+  }
+
+  #passwordMsgId {
+    height: 10px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,218 @@
+.menu_icon {
+    width: 25px;
+    height: 25px;
+    vertical-align: top;
+    margin: 0 auto;
+}
+
+.menu_text_parent {
+    padding-left: 45px !important;
+}
+
+.dashboard {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Dashboard.svg);
+    mask-size: 100% 100%;
+}
+
+.contract {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Contract.svg);
+    mask-size: 100% 100%;
+}
+
+.timesheet {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Timesheet.svg);
+    mask-size: 100% 100%;
+}
+
+.overtime {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Overtime.svg);
+    mask-size: 100% 100%;
+}
+
+.claim {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Claim.svg);
+    mask-size: 100% 100%;
+}
+
+.business_trip {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Business_trip.svg);
+    mask-size: 100% 100%;
+}
+
+.task_assignment {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Task_assignment.svg);
+    mask-size: 100% 100%;
+}
+
+.attendance_summary {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Attendance_summary.svg);
+    mask-size: 100% 100%;
+}
+
+.support {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Support.svg);
+    mask-size: 100% 100%;
+}
+
+.report {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Report.svg);
+    mask-size: 100% 100%;
+}
+
+.logout {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Logout.svg);
+    mask-size: 100% 100%;
+}
+
+.master_data {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Master_data.svg);
+    mask-size: 100% 100%;
+}
+
+.live_tracking {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Live_tracking.svg);
+    mask-size: 100% 100%;
+}
+
+.work_shift {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Work_shift.svg);
+    mask-size: 100% 100%;
+}
+
+.imei_reset {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Imei_reset.svg);
+    mask-size: 100% 100%;
+}
+
+.setting {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Setting.svg);
+    mask-size: 100% 100%;
+}
+
+.approval {
+    background-color: #b0aecc;
+    mask-image: url(../../../../assets/app/images/elabram/Approval.svg);
+    mask-size: 100% 100%;
+}
+
+.m-menu__item--open {
+    border-left: 4px solid #005a92;
+}
+
+.m-menu__item:hover,
+.m-menu__item--open,
+.m-menu__item--active {
+    color: #005a92;
+
+    .dashboard {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Dashboard.svg);
+        mask-size: 100% 100%;
+    }
+
+    .contract {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Contract.svg);
+        mask-size: 100% 100%;
+    }
+
+    .timesheet {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Timesheet.svg);
+        mask-size: 100% 100%;
+    }
+
+    .overtime {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Overtime.svg);
+        mask-size: 100% 100%;
+    }
+
+    .claim {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Claim.svg);
+        mask-size: 100% 100%;
+    }
+
+    .business_trip {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Business_trip.svg);
+        mask-size: 100% 100%;
+    }
+
+    .task_assignment {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Task_assignment.svg);
+        mask-size: 100% 100%;
+    }
+
+    .attendance_summary {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Attendance_summary.svg);
+        mask-size: 100% 100%;
+    }
+
+    .support {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Support.svg);
+        mask-size: 100% 100%;
+    }
+
+    .report {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Report.svg);
+        mask-size: 100% 100%;
+    }
+
+    .master_data {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Master_data.svg);
+        mask-size: 100% 100%;
+    }
+
+    .live_tracking {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Live_tracking.svg);
+        mask-size: 100% 100%;
+    }
+
+    .work_shift {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Work_shift.svg);
+        mask-size: 100% 100%;
+    }
+
+    .imei_reset {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Imei_reset.svg);
+        mask-size: 100% 100%;
+    }
+
+    .setting {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Setting.svg);
+        mask-size: 100% 100%;
+    }
+
+    .approval {
+        background-color: #005a92;
+        mask-image: url(../../../../assets/app/images/elabram/Approval.svg);
+        mask-size: 100% 100%;
+    }
+}

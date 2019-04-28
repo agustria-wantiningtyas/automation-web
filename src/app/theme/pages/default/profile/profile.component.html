@@ -1,0 +1,175 @@
+<div class="profile-page">
+	<!-- BEGIN: Subheader -->
+	<div class="m-subheader ">
+		<div class="d-flex align-items-center">
+			<div class="mr-auto">
+				<h3 class="m-subheader__title m-subheader__title--separator">
+					Profile
+				</h3>
+				<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+					<li class="m-nav__item">
+						<span class="m-nav__link-text">
+							Profile
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- END: Subheader -->
+	<div class="m-content">
+		<div class="row">
+			<div class="col-xl-4 col-lg-4">
+				<div class="m-portlet m-portlet--full-height">
+					<div class="m-portlet__body">
+						<div class="m-card-profile">
+							<div class="m-card-profile__pic">
+								<div class="m-card-profile__pic-wrapper">
+									<img src="{{arrData?.user_image}}" alt="" onerror="this.src='assets/app/images/elabram/Profile_picture.svg'" />
+								</div>
+							</div>
+							<div class="m-card-profile__details">
+								<span class="m-card-profile__name">{{arrData?.name}}</span>
+								<span class="m-card-profile__email m-link">{{arrData?.user_position}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-8 col-lg-8">
+				<div class="m-portlet m-portlet--full-height m-portlet--tabs">
+					<div class="m-portlet__head">
+						<div class="m-portlet__head-tools">
+							<ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+								<li class="nav-item m-tabs__item">
+									<a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab"
+									 ng-reflect-href="#m_user_profile_tab_1">
+										<i class="flaticon-share m--hide"></i>
+										Profile
+									</a>
+								</li>
+								<!-- <li class="nav-item m-tabs__item">
+									<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab" ng-reflect-href="#m_user_profile_tab_2">
+										Change Password
+									</a>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="tab-content">
+						<div class="tab-pane active" id="m_user_profile_tab_1">
+							<form class="m-form m-form--fit m-form--label-align-right">
+								<div class="m-portlet__body">
+									<div class="form-group m-form__group row form-profile">
+										<label for="example-text-input" class="col-2 col-form-label">Email</label>
+										<div class="col-9">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-envelope-o"></i>
+													</span>
+												</div>
+												<input class="form-control m-input" type="text" value="{{arrData?.email || 'N/A' }}" readonly>
+											</div>
+										</div>
+									</div>
+									<div class="form-group m-form__group row form-profile">
+										<label for="example-text-input" class="col-2 col-form-label">Phone</label>
+										<div class="col-4">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-phone"></i>
+													</span>
+												</div>
+												<input class="form-control m-input" type="text" value="{{arrData?.no_telp || 'N/A' }}" readonly>
+											</div>
+										</div>
+										<label for="example-text-input" class="col-1 col-form-label">Mobile</label>
+										<div class="col-4">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-mobile"></i>
+													</span>
+												</div>
+												<input class="form-control m-input" type="text" value="{{arrData?.user_mobile || 'N/A' }}" readonly>
+											</div>
+										</div>
+									</div>
+									<div class="form-group m-form__group row form-profile">
+										<label for="example-text-input" class="col-2 col-form-label">Address</label>
+										<div class="col-9">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-map-marker"></i>
+													</span>
+												</div>
+												<textarea class="form-control m-input" readonly>{{arrData?.user_address || 'N/A' }}</textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane" id="m_user_profile_tab_2">
+							<p-growl [value]="msgs"></p-growl>
+							<form novalidate [formGroup]="myForm" (ngSubmit)="changePassword(myForm.value)" class="m-form m-form--fit m-form--label-align-right">
+								<div class="m-portlet__body">
+									<div class="form-group m-form__group row form-change-password">
+										<label for="example-text-input" class="col-3 col-form-label">Old Password</label>
+										<div class="col-7">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-lock"></i>
+													</span>
+												</div>
+												<input [(ngModel)]="oldPassword" formControlName="setOldPassword" type="password" placeholder="Old Password"
+												 class="form-control m-input">
+											</div>
+										</div>
+									</div>
+									<div class="form-group m-form__group row form-change-password">
+										<label for="example-text-input" class="col-3 col-form-label">New Password</label>
+										<div class="col-7">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-lock"></i>
+													</span>
+												</div>
+												<input (keyup)="checkPass()" (change)="checkPass()" [(ngModel)]="newPassword" formControlName="setNewPassword"
+												 type="password" placeholder="New Password" class="form-control m-input">
+											</div>
+											<div class="input-group-prepend" id="passwordMsgId">{{passMsg}}</div>
+										</div>
+									</div>
+									<div class="form-group m-form__group row form-change-password">
+										<label for="example-text-input" class="col-3 col-form-label">Retype New Password</label>
+										<div class="col-7">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-lock"></i>
+													</span>
+												</div>
+												<input [readOnly]="validateRetype" [(ngModel)]="retypeNewPassword" formControlName="setRetypeNewPassword"
+												 type="password" placeholder="Retype New Password" class="form-control m-input">
+											</div>
+										</div>
+									</div>
+									<div class="text-right">
+										<button [disabled]="!myForm.valid" class="btn m-btn--pill btn-min-width btn-outline btn-shadow">
+											<i class="fa fa-lock"></i> Change Password</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

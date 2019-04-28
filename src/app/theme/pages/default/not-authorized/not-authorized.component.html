@@ -1,0 +1,24 @@
+<!-- END: Subheader -->
+<div class="not-authorized-page">
+    <div class="m-content">
+        <div class="container">
+            <img src="assets/app/images/elabram/401_image.svg" class="image" alt="401" />
+            <div class="text">
+                <img class="brand-logo" alt="Elabram System" src="assets/app/images/elabram/bot.png">
+                <div class="error">401</div>
+                <div class="error-text">You are not authorized for selected action</div>
+                <div class="return-button">
+                    <button (click)="goBack()" type="button" class="btn btn-full m-btn m-btn--pill m-btn--custom">
+                        <i class="fa fa-arrow-left"></i>
+                        Back to the Last Page
+                    </button>
+                    or
+                    <button (click)="goHome()" type="button" class="btn btn-outline m-btn m-btn--pill m-btn--custom">
+                        <i class="fa fa-home"></i>
+                        Return to the Homepage
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

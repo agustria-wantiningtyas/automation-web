@@ -1,0 +1,160 @@
+<div class="login-page">
+	<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin"
+		id="m_login">
+		<div class="m-grid__item m-grid__item--order-tablet-and-mobile-2">
+			<div class="m-stack m-stack--hor m-stack--desktop">
+				<div class="m-stack__item m-stack__item--fluid">
+					<div class="flexbox-container">
+						<div class="col-12 d-flex align-items-center justify-content-center">
+							<div class="new-col col-10 box-shadow-2 p-0">
+								<div class="card border-grey border-lighten-3 m-0">
+									<div class="card-header border-0 text-center">
+										<div class="card-title">
+											<div class="m-login__logo">
+												<div class="p-1">
+													<img src="assets/app/images/elabram/bot.png" class="image-logo">
+												</div>
+												<h6
+													class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
+													<span style="font-size: 15px; font-weight: 400;">Sistem Admin Unit
+														Test</span>
+												</h6>
+											</div>
+										</div>
+										<div class="card-content">
+											<div class="card-body">
+												<p-growl [value]="msgs"></p-growl>
+												<!-- Begin Sign In -->
+												<div class="m-login__signin">
+													<form (ngSubmit)="f.form.valid && signin()" #f="ngForm"
+														class="m-login__form m-form" action="">
+														<ng-template #alertSignin></ng-template>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-envelope-o"></i>
+																	</span>
+																</div>
+																<input class="form-control m-input" type="text"
+																	placeholder="Email" name="email"
+																	[(ngModel)]="model.email" #email="ngModel"
+																	[disabled]="loading" autocomplete="off" autofocus>
+															</div>
+														</div>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-key"></i>
+																	</span>
+																</div>
+																<input
+																	class="form-control m-input m-login__form-input--last"
+																	type="password" placeholder="Password"
+																	[disabled]="loading" name="password"
+																	[(ngModel)]="model.password" #password="ngModel">
+															</div>
+														</div>
+														<div class="m-login__form-action" style="padding: 20px 0px;">
+															<button type="submit"
+																[disabled]="model.email == '' || model.password == '' || disableBtn"
+																[ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
+																id="m_login_signin_submit"
+																class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+																Login
+															</button>
+														</div>
+														<div class="row m-login__form-sub">
+															<div class="col m--align-center">
+																<button type="button" [disabled]="loading"
+																	id="m_login_forget_password">
+																	Register
+																</button>
+															</div>
+														</div>
+													</form>
+												</div>
+												<!-- End Sign In -->
+												<!-- Begin Forget Password -->
+												<div class="m-login__forget-password">
+													<div class="m-login__head">
+														<div class="m-login__desc">
+															Registration
+														</div>
+													</div>
+													<form #fforgot="ngForm" class="m-login__form m-form" action="">
+														<ng-template #alertForgotPass></ng-template>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-user-o"></i>
+																	</span>
+																</div>
+																<input class="form-control m-input" type="text"
+																	placeholder="Your Name" name="name"
+																	[(ngModel)]="model.name" #admin="ngModel"
+																	autocomplete="off" autofocus>
+															</div>
+														</div>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-envelope-o"></i>
+																	</span>
+																</div>
+																<input class="form-control m-input" type="text"
+																	placeholder="Email" name="email"
+																	[(ngModel)]="model.email" #email="ngModel"
+																	id="m_email" autocomplete="off"
+																	[disabled]="loading">
+															</div>
+														</div>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-key"></i>
+																	</span>
+																</div>
+																<input class="form-control m-input m-login__form-input--last"
+																	type="password" placeholder="Password"
+																	name="reg_password" [(ngModel)]="model.reg_password"
+																	#reg_password="ngModel">
+															</div>
+															<div class="input-group-prepend" id="passwordMsgId">
+																{{passMsg}}</div>
+														</div>
+														<div class="m-login__form-action" style="padding: 20px 0px;">
+															<button (click)="registration()" [disabled]="emailValidation"
+																[ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
+																id="m_login_forget_password_submit"
+																class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+																Register
+															</button>
+														</div>
+														<div class="row m-login__form-sub">
+															<div class="col m--align-center">
+																<button type="button" [disabled]="loading"
+																	id="m_login_forget_password_cancel">
+																	Back to Login
+																</button>
+															</div>
+														</div>
+													</form>
+												</div>
+												<!-- End Forget Password -->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

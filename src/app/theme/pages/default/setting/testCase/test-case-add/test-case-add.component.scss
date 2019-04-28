@@ -1,0 +1,19 @@
+.feature-add-page {
+    .m-content {
+        width: 100%;
+        padding: 0;
+        display: table;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+
+        .outer-box {
+            padding: 0;
+            vertical-align: middle;
+            display: table-cell;
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,109 @@
+<div class="login-page">
+	<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin"
+	 id="m_login">
+		<div class="m-grid__item m-grid__item--order-tablet-and-mobile-2">
+			<div class="m-stack m-stack--hor m-stack--desktop">
+				<div class="m-stack__item m-stack__item--fluid">
+					<div class="flexbox-container">
+						<div class="col-12 d-flex align-items-center justify-content-center">
+							<div class="col-md-4 col-10 box-shadow-2 p-0">
+								<div class="card border-grey border-lighten-3 m-0">
+									<div class="card-header border-0 text-center">
+										<div class="card-title">
+											<div class="m-login__logo">
+												<div class="p-1">
+													<img src="assets/app/images/elabram/Elabram_logo.svg" class="image-logo">
+													<img src="assets/app/images/elabram/Elabram_text.svg" class="image-text">
+												</div>
+												<h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
+													<span style="font-size: 15px; font-weight: 400;">EPS (Elabram Payroll Systems)</span>
+												</h6>
+											</div>
+										</div>
+										<div class="card-content">
+											<div class="card-body pb-2">
+												<p-growl [value]="msgs"></p-growl>
+												<!-- Begin Company Registration -->
+												<div class="m-login__company-registration">
+													<div class="m-login__head">
+														<div class="m-login__desc">
+															Company Registration
+														</div>
+													</div>
+													<form #fforgot="ngForm" class="m-login__form m-form" action="">
+														<ng-template #alertCompanyRegistration></ng-template>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-building-o"></i>
+																	</span>
+																</div>
+																<input (keyup)="registerValidation()" class="form-control m-input" type="text" placeholder="Company Name"
+																 name="company" [(ngModel)]="model.company" #company="ngModel" [disabled]="loading" id="m_company"
+																 autocomplete="off" autofocus>
+															</div>
+														</div>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-user-o"></i>
+																	</span>
+																</div>
+																<input (keyup)="registerValidation()" class="form-control m-input" type="text" placeholder="Your Name"
+																 name="admin" [disabled]="loading" [(ngModel)]="model.admin" #admin="ngModel" autocomplete="off">
+															</div>
+														</div>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-envelope-o"></i>
+																	</span>
+																</div>
+																<input (keyup)="registerValidation()" class="form-control m-input" type="text" placeholder="Email" name="reg_email"
+																 [disabled]="loading" [(ngModel)]="model.email" #reg_email="ngModel" autocomplete="off" autofocus>
+															</div>
+														</div>
+														<div class="form-group m-form__group">
+															<div class="input-group mb-1">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">
+																		<i class="fa fa-key"></i>
+																	</span>
+																</div>
+																<input (keyup)="registerValidation()" class="form-control m-input m-login__form-input--last" type="password"
+																 [disabled]="loading" placeholder="Password" name="reg_password" [(ngModel)]="model.reg_password"
+																 #reg_password="ngModel">
+															</div>
+															<div class="input-group-prepend" id="passwordMsgId">{{passMsg}}</div>
+														</div>
+														<div class="m-login__form-action" style="padding: 0px 0px 10px 0;">
+															<button (click)="registrater()" [disabled]="regisValid" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
+															 id="m_login_company_registration_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+																Register
+															</button>
+														</div>
+														<div class="row m-login__form-sub">
+															<div class="col m--align-center">
+																<button type="button" [disabled]="loading" (click)="loginPage();" id="m_login_back_login">
+																	Back to Login
+																</button>
+															</div>
+														</div>
+													</form>
+												</div>
+												<!-- End Company Registration -->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
