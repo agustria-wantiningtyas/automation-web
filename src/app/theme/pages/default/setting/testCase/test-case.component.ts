@@ -32,8 +32,8 @@ export class TestCaseComponent implements OnInit {
 
     // pagination
     public start_ta = 0;
-    public limit_ta = 5;
-    public rows = 5;
+    public limit_ta = 10;
+    public rows = 10;
     public pageLinks = 3;
     public rowsPerPageOptions: any = [5, 10, 20];
     public stop_ta = false;
