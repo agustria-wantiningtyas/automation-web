@@ -24,6 +24,7 @@ export class RunTestComponent implements OnInit {
     @ViewChild('fileInput') fileInput: ElementRef;
     public tokenUser: any;
     msgs: Message[] = [];
+    _msgs: Message[] = []
     public data: any = [];
     public arrEmployee: any = [];
     public employee: any = [];
@@ -348,7 +349,7 @@ export class RunTestComponent implements OnInit {
     doExecute(data) {
         Helpers.setLoading(true);
         const content = {
-            urlName: 'run-test/excecute',
+            urlName: 'run-test/store',
             body: {
                 token: this.tokenUser,
                 test_case_id: data.selectedCase,
@@ -358,19 +359,42 @@ export class RunTestComponent implements OnInit {
         this.post$ = this._generalService.getData(content).subscribe(
             _result => {
                 Helpers.setLoading(false);
-
                 if (_result['response_code'] == 200) {
                     this.loadEmployee('');
+                    setTimeout(() => {
+                        this.doExe(data, _result['id_history']);
+                    }, 3000);
+                    this._msgs = [{ severity: 'success', summary: 'Please wait ... executing automation test.' }];
                 } else {
                     this.msgs = [{ severity: 'warn', summary: 'Warning!', detail: _result['message_detail'] }];
                 }
             });
     }
 
+    doExe(data, id) {
+        const content = {
+            urlName: 'run-test/execute',
+            body: {
+                test_case_id: data.selectedCase,
+                id_history: id,
+            }
+        }
+
+        this.post$ = this._generalService.getData(content).subscribe(
+            _result => {
+                try {
+                    console.log('ok');
+
+                } catch (error) {
+                    this.msgs = [{ severity: 'warn', summary: 'Warning!', detail: _result['message_detail'] }];
+                }
+            });
+    }
+
     goDetail(_data) {
-        var str = _data.name;
-        str = str.replace(/\s+/g, '_').toLowerCase();
-        this.router.navigate(['/run-test/detail', { str: str }]);
+        var path_url = _data.path_url;
+        var encodedString = btoa(path_url);
+        this.router.navigate(['/run-test/detail', { str: encodedString }]);
     }
 
     doRefresh() {

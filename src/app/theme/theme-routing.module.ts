@@ -38,7 +38,7 @@ const routes: Routes = [
                 "path": "setting/feature/edit",
                 // "canActivateChild": [AuthGuard],
                 "loadChildren": "./pages/default/setting/feature/feature-edit/feature-edit.module#FeatureEditModule"
-            },{
+            }, {
                 "path": "setting/test-case",
                 // "canActivateChild": [AuthGuard],
                 "loadChildren": "./pages/default/setting/testCase/test-case.module#TestCaseModule"

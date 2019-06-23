@@ -278,7 +278,7 @@ export class ReportComponent implements OnInit {
                 month: data.selectedMonth,
                 year: data.selectedYear
             }
-            
+
         }
 
         setTimeout(() => {
@@ -343,7 +343,7 @@ export class ReportComponent implements OnInit {
 
     doPreview(data) {
         this.is_selected_month = data.selectedMonth,
-        this.is_selected_year = data.selectedYear
+            this.is_selected_year = data.selectedYear
         this.loadFeature('');
     }
 

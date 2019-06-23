@@ -37,6 +37,7 @@
 					<div class="tab-content">
 
 						<p-growl [value]="msgs"></p-growl>
+						<p-growl [value]="_msgs" [life]="20000" ></p-growl>
 						<form novalidate [formGroup]="myForm">
 							<p-fieldset legend="Total test : {{test_case?.length}} case">
 								<div class="col-lg-12">

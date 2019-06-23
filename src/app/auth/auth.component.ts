@@ -221,7 +221,7 @@ export class AuthComponent implements OnInit {
         mUtil.animateClass(login.getElementsByClassName('m-login__forget-password')[0], 'flipInX animated');
     }
 
-    registration(){
+    registration() {
         Helpers.setLoading(true);
         const content = {
             urlName: 'employee/store',
@@ -236,7 +236,7 @@ export class AuthComponent implements OnInit {
         this.post$ = this._generalService.getData(content).subscribe(
             _result => {
                 Helpers.setLoading(false);
-                
+
                 if (_result['response_code'] == 200) {
                     this.displaySignInForm();
                     this.showAlert('alertSignin');
