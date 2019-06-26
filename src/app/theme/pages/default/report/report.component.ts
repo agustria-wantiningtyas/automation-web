@@ -198,7 +198,7 @@ export class ReportComponent implements OnInit {
                                 this.arrFeature.push({
                                     id: item.id,
                                     name: item.name,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY"),
+                                    created_at: moment(item.created_at).format("DD MMM YYYY HH:mm:ss"),
                                 });
                             }
                         } else {
@@ -206,7 +206,7 @@ export class ReportComponent implements OnInit {
                                 this.arrFeature.push({
                                     id: item.id,
                                     name: item.name,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY"),
+                                    created_at: moment(item.created_at).format("DD MMM YYYY HH:mm:ss"),
                                 });
                             }
                             this.arrFeature = this.arrFeature.slice(0, this.rows);
@@ -256,12 +256,6 @@ export class ReportComponent implements OnInit {
     }
     /* End index list */
 
-
-    // tslint:disable-next-line:use-life-cycle-interface
-    ngOnDestroy() {
-        this.post$.unsubscribe();
-    }
-
     mapIdle() {
         console.log('idle');
     }
@@ -285,7 +279,7 @@ export class ReportComponent implements OnInit {
             this.post$ = this._generalService.getData(content).subscribe(
                 result => {
                     this.tmpAttData = [];
-                    this.ExportTitle = 'Report - Test Case Activity'
+                    this.ExportTitle = 'Laporan Pengujian Otomatis Periode ' + data.selectedMonth + ' ' + data.selectedYear;
                     this.ExportName = 'report_test_case';
                     this.headerTmpAttData = [];
                     this.headerTmpAttData.push(
@@ -300,8 +294,8 @@ export class ReportComponent implements OnInit {
                         for (let i = 0; i < result['data'].length; i++) {
                             this.tmpAttData.push({
                                 'No': i + 1,
-                                'Name': result['data'][i].name,
-                                'Date': result['data'][i].created_at,
+                                'Nama Pengujian': result['data'][i].name,
+                                'Tanggal Pengujian': result['data'][i].created_at,
                             });
                         }
                         this.startCellData = this.headerTmpAttData.length;
@@ -349,6 +343,13 @@ export class ReportComponent implements OnInit {
 
     goEdit(feature) {
         this.router.navigate(['/setting/test-case/edit', { id: feature.id }]);
+    }
+
+    // tslint:disable-next-line:use-life-cycle-interface
+    ngOnDestroy() {
+        if(this.post$){
+            this.post$.unsubscribe();
+        }
     }
 
     doRefresh() {

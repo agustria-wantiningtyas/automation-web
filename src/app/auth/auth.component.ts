@@ -39,6 +39,8 @@ export class AuthComponent implements OnInit {
     public disableBtn: boolean = false;
     token: any;
     user_data: string;
+    regisValid: boolean = true;
+    passMsg: string;
 
     constructor(
         private _router: Router,
@@ -245,5 +247,73 @@ export class AuthComponent implements OnInit {
                     this.msgs = [{ severity: 'warn', summary: 'Warning!', detail: _result['message_detail'] }];
                 }
             });
+    }
+
+    registerValidation() {
+        if (this.model.name == '' || this.model.name == null) {
+            this.regisValid = true;
+        } else if (this.model.email == '' || this.model.email == null) {
+            this.regisValid = true;
+        } else if (this.model.reg_password == '' || this.model.reg_password == null) {
+            this.regisValid = true;
+        } else {
+            this.passMsg = this.checkPwd(this.model.reg_password);
+            if (this.validateEmail()) {
+                if (this.passMsg == "ok") {
+                    this.passMsg = '';
+                    document.getElementById('passwordMsgId').style.visibility = "hidden";
+                    this.regisValid = false;
+                } else {
+                    document.getElementById('passwordMsgId').style.visibility = "visible";
+                    document.getElementById('passwordMsgId').style.color = "#f44242";
+                    this.regisValid = true;
+                }
+            } else {
+                this.regisValid = true;
+                if (this.passMsg == "ok") {
+                    this.passMsg = '';
+                }
+            }
+        }
+    }
+
+    checkPwd(paswd) {
+        if (paswd.length < 8) {
+            return ("Password must contain 8 character");
+        } else if (paswd.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\?]/) != -1) {
+            return ("Space and some special character not allowed!");
+        } else if (paswd.search(/\d/) == -1) {
+            return ("Password must contain numbers!");
+        } else if (paswd.search(/[a-zA-Z]/) == -1) {
+            return ("Password must contain letters!");
+        } else if (paswd.search(/[!\@\#\$\%\^\&\*\(\)\_\+\?]/) == -1) {
+            return ("Password must contain !@#$%^&*()_+?");
+        } else if (paswd.length > 16) {
+            return ("Password must be less than 16 character!");
+        } else {
+            return ("ok");
+        }
+    }
+
+    togglePassword() {
+        var getClass = $(".toggle-password").attr("class").split(' ').slice(-1);
+        if (String(getClass) == "fa-eye-slash") {
+            $(".toggle-password").removeClass("fa-eye-slash");
+            $(".toggle-password").addClass("fa-eye");
+        } else {
+            $(".toggle-password").removeClass("fa-eye");
+            $(".toggle-password").addClass("fa-eye-slash");
+        }
+        var getType = $(".m-login__form-input--last").attr("type");
+        if (getType == "password") {
+            $(".m-login__form-input--last").attr("type", "text");
+        } else {
+            $(".m-login__form-input--last").attr('type', "password");
+        }
+    }
+
+    validateEmail() {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(this.model.email);
     }
 }

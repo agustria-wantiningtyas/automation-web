@@ -162,7 +162,7 @@ export class RunTestComponent implements OnInit {
                                     id: item.id,
                                     name: item.name,
                                     path_url: item.path_url,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY"),
+                                    created_at: moment(item.created_at).format("DD MMM YYYY HH:mm:ss"),
                                 });
                             }
                         } else {
@@ -171,7 +171,7 @@ export class RunTestComponent implements OnInit {
                                     id: item.id,
                                     name: item.name,
                                     path_url: item.path_url,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY"),
+                                    created_at: moment(item.created_at).format("DD MMM YYYY HH:mm:ss"),
                                 });
                             }
                             this.arrEmployee = this.arrEmployee.slice(0, this.rows);
