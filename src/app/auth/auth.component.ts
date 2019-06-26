@@ -254,25 +254,17 @@ export class AuthComponent implements OnInit {
             this.regisValid = true;
         } else if (this.model.email == '' || this.model.email == null) {
             this.regisValid = true;
-        } else if (this.model.reg_password == '' || this.model.reg_password == null) {
-            this.regisValid = true;
         } else {
-            this.passMsg = this.checkPwd(this.model.reg_password);
+            // this.passMsg = this.checkPwd(this.model.reg_password);
             if (this.validateEmail()) {
-                if (this.passMsg == "ok") {
-                    this.passMsg = '';
-                    document.getElementById('passwordMsgId').style.visibility = "hidden";
-                    this.regisValid = false;
-                } else {
-                    document.getElementById('passwordMsgId').style.visibility = "visible";
-                    document.getElementById('passwordMsgId').style.color = "#f44242";
-                    this.regisValid = true;
-                }
+                this.passMsg = '';
+                document.getElementById('passwordMsgId').style.visibility = "hidden";
+                this.regisValid = false;
             } else {
                 this.regisValid = true;
-                if (this.passMsg == "ok") {
-                    this.passMsg = '';
-                }
+                document.getElementById('passwordMsgId').style.visibility = "visible";
+                document.getElementById('passwordMsgId').style.color = "#f44242";
+                this.passMsg = 'Invalid email';
             }
         }
     }

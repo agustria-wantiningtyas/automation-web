@@ -110,6 +110,8 @@
 																	id="m_email" autocomplete="off"
 																	[disabled]="loading">
 															</div>
+															<div class="input-group-prepend" id="passwordMsgId">
+																{{passMsg}}</div>
 														</div>
 														<div class="form-group m-form__group">
 															<div class="input-group mb-1">
@@ -118,13 +120,12 @@
 																		<i class="fa fa-key"></i>
 																	</span>
 																</div>
-																<input (keyup)="registerValidation()" class="form-control m-input m-login__form-input--last"
+																<input class="form-control m-input m-login__form-input--last"
 																	type="password" placeholder="Password"
 																	name="reg_password" [(ngModel)]="model.reg_password"
 																	#reg_password="ngModel">
 															</div>
-															<div class="input-group-prepend" id="passwordMsgId">
-																{{passMsg}}</div>
+															
 														</div>
 														<div class="m-login__form-action" style="padding: 20px 0px;">
 															<button (click)="registration()" [disabled]="regisValid"

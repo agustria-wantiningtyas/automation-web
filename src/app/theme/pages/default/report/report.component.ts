@@ -262,6 +262,21 @@ export class ReportComponent implements OnInit {
 
     // Export Spreadsheet
     doExport(data) {
+        var d = new Date(data.selectedMonth+'/01/2019');
+        var month = new Array();
+        month[0] = "January";
+        month[1] = "February";
+        month[2] = "March";
+        month[3] = "April";
+        month[4] = "May";
+        month[5] = "June";
+        month[6] = "July";
+        month[7] = "August";
+        month[8] = "September";
+        month[9] = "October";
+        month[10] = "November";
+        month[11] = "December";
+        var n = month[d.getMonth()];
 
         const content = {
             urlName: 'report/index',
@@ -279,7 +294,7 @@ export class ReportComponent implements OnInit {
             this.post$ = this._generalService.getData(content).subscribe(
                 result => {
                     this.tmpAttData = [];
-                    this.ExportTitle = 'Laporan Pengujian Otomatis Periode ' + data.selectedMonth + ' ' + data.selectedYear;
+                    this.ExportTitle = 'Laporan Pengujian Otomatis Periode ' + n + ' ' + data.selectedYear;
                     this.ExportName = 'report_test_case';
                     this.headerTmpAttData = [];
                     this.headerTmpAttData.push(
@@ -347,7 +362,7 @@ export class ReportComponent implements OnInit {
 
     // tslint:disable-next-line:use-life-cycle-interface
     ngOnDestroy() {
-        if(this.post$){
+        if (this.post$) {
             this.post$.unsubscribe();
         }
     }
