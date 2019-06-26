@@ -127,7 +127,7 @@ export class TestCaseComponent implements OnInit {
                                 this.arrFeature.push({
                                     id: item.id,
                                     name: item.name,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY HH:mm:ss"),
+                                    created_at: moment(item.created_at).format("DD MMM YYYY  HH:mm:ss"),
                                 });
                             }
                         } else {
@@ -135,7 +135,7 @@ export class TestCaseComponent implements OnInit {
                                 this.arrFeature.push({
                                     id: item.id,
                                     name: item.name,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY HH:mm:ss"),
+                                    created_at: moment(item.created_at).format("DD MMM YYYY  HH:mm:ss"),
                                 });
                             }
                             this.arrFeature = this.arrFeature.slice(0, this.rows);
