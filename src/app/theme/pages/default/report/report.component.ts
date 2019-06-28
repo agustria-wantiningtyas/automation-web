@@ -264,14 +264,14 @@ export class ReportComponent implements OnInit {
     doExport(data) {
         var d = new Date(data.selectedMonth+'/01/2019');
         var month = new Array();
-        month[0] = "January";
-        month[1] = "February";
-        month[2] = "March";
+        month[0] = "Januari";
+        month[1] = "Februari";
+        month[2] = "Maret";
         month[3] = "April";
-        month[4] = "May";
-        month[5] = "June";
-        month[6] = "July";
-        month[7] = "August";
+        month[4] = "Mei";
+        month[5] = "Juni";
+        month[6] = "Juli";
+        month[7] = "Agustus";
         month[8] = "September";
         month[9] = "October";
         month[10] = "November";
