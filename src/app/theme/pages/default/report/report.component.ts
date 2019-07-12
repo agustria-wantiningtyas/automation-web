@@ -84,7 +84,7 @@ export class ReportComponent implements OnInit {
     is_year: any = [];
     is_selected_month: any;
     is_selected_year: any;
-    today: any = moment().format("DD MMMM YYYY")
+    today: any;
 
     public myForm: any = null;
     config: ExportAsConfig = {
@@ -105,7 +105,8 @@ export class ReportComponent implements OnInit {
         private exportAsService: ExportAsService
 
     ) {
-
+        moment.locale('id');
+        this.today = moment().format("DD MMMM YYYY");
         this.myForm = fb.group({
             'selectedMonth': ['', Validators.compose([Validators.required])],
             'selectedYear': ['', Validators.compose([Validators.required])],
@@ -230,7 +231,7 @@ export class ReportComponent implements OnInit {
                                 this.arrFeature.push({
                                     id: item.id,
                                     name: item.name,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY  HH:mm:ss"),
+                                    created_at: moment(item.created_at).format("DD MMMM YYYY  HH:mm:ss"),
                                 });
                             }
                         } else {
@@ -238,7 +239,7 @@ export class ReportComponent implements OnInit {
                                 this.arrFeature.push({
                                     id: item.id,
                                     name: item.name,
-                                    created_at: moment(item.created_at).format("DD MMM YYYY  HH:mm:ss"),
+                                    created_at: moment(item.created_at).format("DD MMMM YYYY  HH:mm:ss"),
                                 });
                             }
                             this.arrFeature = this.arrFeature.slice(0, this.rows);
