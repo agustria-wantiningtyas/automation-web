@@ -5,11 +5,13 @@ import { Subscription } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
+import { Config } from './../../../../components/api-config';
 
 import { GeneralService } from '../../../../_services/general.service';
 import { TransferService } from '../../../../_services/transfer.service';
 import * as moment from 'moment';
 import { Validators, FormBuilder } from '@angular/forms';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 type AOA = any[][];
 @Component({
@@ -77,13 +79,20 @@ export class ReportComponent implements OnInit {
     emailFilter: any;
     noTelephoneFilter: any;
     is_preview: boolean = false;
+    is_pdf: boolean = false;
     is_month: any = [];
     is_year: any = [];
     is_selected_month: any;
     is_selected_year: any;
+    today: any = moment().format("DD MMMM YYYY")
 
     public myForm: any = null;
-
+    config: ExportAsConfig = {
+        type: 'pdf', // the type you want to download
+        elementId: 'mytable', // the id of html/table element
+    }
+    _month: string;
+    public arrData: any;
 
     constructor(
         public router: Router,
@@ -93,7 +102,7 @@ export class ReportComponent implements OnInit {
         private excelService: ExcelService,
         public _transferService: TransferService,
         public fb: FormBuilder,
-
+        private exportAsService: ExportAsService
 
     ) {
 
@@ -110,28 +119,28 @@ export class ReportComponent implements OnInit {
         this.is_month = [
             {
                 value: 1,
-                label: 'January',
+                label: 'Januari',
             }, {
                 value: 2,
-                label: 'February',
+                label: 'Februari',
             }, {
                 value: 3,
-                label: 'March',
+                label: 'Maret',
             }, {
                 value: 4,
                 label: 'April',
             }, {
                 value: 5,
-                label: 'May',
+                label: 'Mei',
             }, {
                 value: 6,
-                label: 'June',
+                label: 'Juni',
             }, {
                 value: 7,
-                label: 'July',
+                label: 'Juli',
             }, {
                 value: 8,
-                label: 'August',
+                label: 'Agustus',
             }, {
                 value: 9,
                 label: 'Sepetember',
@@ -143,7 +152,7 @@ export class ReportComponent implements OnInit {
                 label: 'November',
             }, {
                 value: 12,
-                label: 'December',
+                label: 'Desember',
             }
         ];
 
@@ -158,7 +167,30 @@ export class ReportComponent implements OnInit {
 
         this.is_year.sort();
         this.is_year.reverse();
+        this.loadProfile();
 
+    }
+
+    loadProfile() {
+        const body = {
+            token: this.dataUser['token'],
+            id: this.dataUser['emp_id']
+        }
+        this.http.post(Config.apiUrl + 'employee/show', body).subscribe((val) => {
+            this.arrData = val['data'];
+        });
+    }
+
+    export() {
+        // download the file using old school javascript method
+        this.exportAsService.save(this.config, 'report').subscribe(() => {
+            // save started
+            // this.is_pdf = true;
+        });
+        // get the data as base64 or json object for json type - this will be helpful in ionic or SSR
+        // this.exportAsService.get(this.config).subscribe(content => {
+        //     console.log(content);
+        // });
     }
 
     /* Begin index list */
@@ -262,7 +294,7 @@ export class ReportComponent implements OnInit {
 
     // Export Spreadsheet
     doExport(data) {
-        var d = new Date(data.selectedMonth+'/01/2019');
+        var d = new Date(data.selectedMonth + '/01/2019');
         var month = new Array();
         month[0] = "Januari";
         month[1] = "Februari";
@@ -275,7 +307,7 @@ export class ReportComponent implements OnInit {
         month[8] = "September";
         month[9] = "October";
         month[10] = "November";
-        month[11] = "December";
+        month[11] = "Desember";
         var n = month[d.getMonth()];
 
         const content = {
@@ -353,6 +385,42 @@ export class ReportComponent implements OnInit {
     doPreview(data) {
         this.is_selected_month = data.selectedMonth,
             this.is_selected_year = data.selectedYear
+        if (data.selectedMonth == 1) {
+            this._month = "Januari";
+        }
+        if (data.selectedMonth == 2) {
+            this._month = "Februari";
+        }
+        if (data.selectedMonth == 3) {
+            this._month = "Maret";
+        }
+        if (data.selectedMonth == 4) {
+            this._month = "April";
+        }
+        if (data.selectedMonth == 5) {
+            this._month = "Mei";
+        }
+        if (data.selectedMonth == 6) {
+            this._month = "Juni";
+        }
+        if (data.selectedMonth == 7) {
+            this._month = "Juli";
+        }
+        if (data.selectedMonth == 8) {
+            this._month = "Agustus";
+        }
+        if (data.selectedMonth == 9) {
+            this._month = "September";
+        }
+        if (data.selectedMonth == 10) {
+            this._month = "October";
+        }
+        if (data.selectedMonth == 11) {
+            this._month = "November";
+        }
+        if (data.selectedMonth == 12) {
+            this._month = "Desember";
+        }
         this.loadFeature('');
     }
 

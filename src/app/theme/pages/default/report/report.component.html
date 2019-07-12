@@ -34,18 +34,21 @@
 											<p-dropdown class="input-multiselect" [options]="is_month"
 												placeholder="Month" formControlName="selectedMonth">
 											</p-dropdown>
-											<p-dropdown class="input-multiselect" [options]="is_year"
-												placeholder="Year" formControlName="selectedYear">
+											<p-dropdown class="input-multiselect" [options]="is_year" placeholder="Year"
+												formControlName="selectedYear">
 											</p-dropdown>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6" style="text-align: center;">
 									<button type=" button" class="btn m-btn--pill btn-import btn-shadow"
-										(click)="doPreview(myForm.value);"
-										style="padding: 5px 25px;">Preview</button>
+										(click)="doPreview(myForm.value);" style="padding: 5px 25px;">Preview</button>
+									<!-- <button type="button" class="btn m-btn--pill btn-success btn-shadow"
+										style="padding: 5px 25px;" (click)="doExport(myForm.value)"> Export to
+										Excel</button>
 									<button type="button" class="btn m-btn--pill btn-success btn-shadow"
-										style="padding: 5px 25px;" (click)="doExport(myForm.value)"> Export to Excel</button>
+										style="padding: 5px 25px;" (click)="export('pdf', 'portrait')"> Export to
+										PDF</button> -->
 								</div>
 							</div>
 						</form>
@@ -56,46 +59,85 @@
 				<div class="m-portlet m-portlet--full-height">
 					<div class="tab-content">
 						<p-growl [value]="msgs"></p-growl>
+						<div class="col-md-6" style="text-align: left;">
+						</div>
+						<div class="col-md-6" style="text-align: right; max-width: 96%">
+							<button type="button" class="btn m-btn--pill btn-success btn-shadow"
+								style="padding: 5px 25px;" (click)="export('pdf', 'portrait')"> Export to
+								PDF</button>
+						</div>
+						<div id="mytable" style="margin: 35px">
+							<table width="98%">
+								<tr>
+									<td><img src="assets/bukalapak.png" width="200px" height="70px"></td>
+									<td>Plaza City View
+										Jl. Kemang Timur No.22, RT.14/RW.8, Pejaten Bar., Kec. Ps. Minggu, Kota Jakarta
+										Selatan, Daerah Khusus
+										Ibukota Jakarta 12510</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<hr style="height:4px;border:none;color:#333;background-color:#333;" />
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
 
-						<p-dataTable #dt [value]="arrFeature" [lazy]="true" [rows]="rows" [paginator]="false"
-							[pageLinks]="pageLinks" [rowsPerPageOptions]="rowsPerPageOptions"
-							[totalRecords]="totalRecords" responsive="true"
-							[loading]="loading">
+								<tr>
+									<td colspan="3" align="center"><b>
+											<h4>LAPORAN PENGUJIAN OTOMATIS</h4>
+										</b></td>
+								</tr>
+								<tr>
+									<td colspan="3" align="center"><b>
+											<h4>PERIODE {{_month}}
+												{{is_selected_year}}</h4>
+										</b></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</table>
+							<table border="1" width="98%">
 
-							<p-column field="created_at" header="No" [style]="{ width: '20px', 'text-align': 'left' }"
-								[sortable]="false">
-								<ng-template let-rowIndexValue="rowIndex" pTemplate="body">
-									{{rowIndexValue+1}}
-								</ng-template>
-							</p-column>
+								<tr>
+									<td align="center"><b>No</b></td>
+									<td align="center"><b>Nama Pengujian</b></td>
+									<td align="center"><b>Waktu Pengujian</b></td>
+								</tr>
+								<tr *ngFor="let item of arrFeature; let i = index">
+									<td align="center">{{i+1}}</td>
+									<td>{{item.name}}</td>
+									<td>{{item.created_at}}</td>
+								</tr>
+							</table>
+							<br>
+							<div class="col-md-6" style="text-align: left;">
+							</div>
+							<div class="col-md-6" style="text-align: right; max-width: 96%">
+								Jakarta, {{today}}
+							</div>
+							<div class="col-md-6" style="text-align: left;">
+							</div>
+							<div class="col-md-6" style="text-align: right; max-width: 96%">
+								Penanggungjawab
+							</div>
+							<br>
+							<br>
+							<br>
+							<br>
+							<div class="col-md-6" style="text-align: left;">
+							</div>
+							<div class="col-md-6" style="text-align: right; max-width: 96%">
+								{{arrData?.name}}
+							</div>
+						</div>
 
-							<p-column *ngFor="let col of feature" [field]="col.field" [header]="col.header"
-								[style]="col.style" [filter]="col.filter" [filterMatchMode]="col.filterMatchMode"
-								[sortable]="col.sortable">
-
-								<ng-template *ngIf="col.header == 'Test Case'" pTemplate="filter" let-col>
-									<input type="text" style="width:100%;" class="input-text" [(ngModel)]="nameFilter"
-										(keyup.enter)="dt.filter($event.value=nameFilter,col.field,col.filterMatchMode);"
-										(change)="dt.filter($event.value=nameFilter,col.field,col.filterMatchMode);" />
-								</ng-template>
-								<ng-template *ngIf="col.header == 'Feature Name'" pTemplate="filter" let-col>
-									<input type="text" style="width:100%;" class="input-text"
-										[(ngModel)]="featureNameFilter"
-										(keyup.enter)="dt.filter($event.value=featureNameFilter,col.field,col.filterMatchMode);"
-										(change)="dt.filter($event.value=featureNameFilter,col.field,col.filterMatchMode);" />
-								</ng-template>
-
-							</p-column>
-
-							<ng-template pTemplate="paginatorRight">
-								<span
-									style="position: absolute; right: 10px; bottom: 7px; color:#0073ea; font-weight: normal;">Showing
-									{{arrFeature.length}}
-									of {{totalRecords}}
-									entries</span>
-							</ng-template>
-
-						</p-dataTable>
 					</div>
 				</div>
 			</div>
@@ -135,3 +177,22 @@
 		</div>
 	</p-footer>
 </p-dialog>
+
+<!-- <div *ngIf="is_pdf">
+	<table id="mytable">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>Test Case</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td>1363480000</td>
+				<td>March 24 2014</td>
+			</tr>
+		</tbody>
+	</table>
+</div> -->

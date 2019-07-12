@@ -8,6 +8,7 @@ import { LayoutModule } from '../../../layouts/layout.module';
 import { DefaultComponent } from '../default.component';
 import { DataTableModule, PaginatorModule, ConfirmationService, ConfirmDialogModule, GrowlModule, CalendarModule, MultiSelectModule, DialogModule, DropdownModule } from 'primeng/primeng';
 import { GeneralService } from '../../../../_services/general.service';
+import { ExportAsModule } from 'ngx-export-as';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         DialogModule,
         FormsModule,
         ReactiveFormsModule,
-        DropdownModule
+        DropdownModule,
+        ExportAsModule
     ], exports: [
         RouterModule
     ], declarations: [
